@@ -1,6 +1,3 @@
-![image](https://github.com/user-attachments/assets/22e37c83-8937-4db2-8adf-00bc39809f20)![image](https://github.com/user-attachments/assets/c8562676-61ef-425d-99e6-a1fe9ca8f5b6)# Passo a passo
-[DOCUMENTAÇÃO SEGUIDA](https://cloud.google.com/dataform/docs/workspace-compilation-overrides?hl=pt-br&_gl=1*7eejrx*_ga*MTc0NzUwODUyLjE3MjI0NTMwNzA.*_ga_WH2QY8WWF5*MTcyNTU2NTM1Ny4xOS4xLjE3MjU1NjU5OTIuMy4wLjA.)
-
 ### Passo 1 - Criar repositórios
 Criar um repositório no Bitbucket:
 
