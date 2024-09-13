@@ -105,4 +105,105 @@ Do you wish to use Application Default Credentials or JSON Key [1/2]:
 
 Nessa opção, você deve inserir o caminho para o arquivo de credenciais da sua conta de serviço, que foi baixado na sua máquina ao cria-lá na ***secção 2***.
 
-Feito essa ação você receberá um retorno de sucesso.
+Feito essa ação você receberá um retorno de sucesso que suas credenciais foram cadastradas.
+
+> [!CAUTION]
+> Se você usa um sistema de controle de origem, não confirme o df-credentials.json. no repositório para proteger essas credenciais. Recomendamos que você adicione o parâmetro .df-credentials.json em .gitignore.
+
+## 5. Criando sua primeira query
+
+- 5.1 O seu local de trabalho será dentro da pasta definitions, então todas as suas views e tabelas devem ser alocadas lá.
+
+Dentro da para ***definitions*** crie um arquivo com o nome de sua preferência com a terminação de .sqlx
+
+Exemplo:
+example.sqlx
+
+- 5.2 Sintexe básica sqlx
+
+config { type: '**TABLE_TYPE**' } **SELECT_STATEMENT**
+
+- TABLE_TYPE: o tipo da tabela: **table**, **incremental** ou **view**.
+- SELECT_STATEMENT: uma instrução SELECT que define a tabela.
+
+### Exemplo de query para criar uma tabela:
+```sql
+config {
+  type: "table"
+}
+
+SELECT * 
+FROM `dataform.teste`
+```
+
+Nessa caso a query irá criar uma tabela **(type: table)** de nome "example" **(nome do arquivo)**, buscando os dados da tabela teste **(`dataform.teste` é caminho da tabela)**.
+
+- 5.3 Compilação
+
+Para conferir a saída do processo de compilação no terminal, execute o seguinte comando:
+
+```bash
+dataform compile
+```
+
+Para visualizar a saída do processo de compilação como um objeto JSON, execute o seguinte comando:
+
+```bash
+dataform compile --json
+```
+
+Para visualizar a saída da compilação com variáveis de compilação personalizadas, execute o seguinte comando:
+
+```bash
+dataform compile --vars=SAMPLE_VAR=SAMPLE_VALUE,foo=bar
+```
+
+Substitua:
+- `SAMPLE_VAR`: sua variável de compilação personalizada.
+- `SAMPLE_VALUE`: o valor da variável de compilação personalizada.
+
+---
+
+- 5.4 Execução de Código
+
+Para executar o código do seu projeto no Dataform, execute o seguinte comando:
+
+```bash
+dataform run
+```
+
+Para executar o código do seu projeto do Dataform no BigQuery com variáveis de compilação personalizadas, execute o seguinte comando:
+
+```bash
+dataform run --vars=SAMPLE_VAR=SAMPLE_VALUE,sampleVar2=sampleValue2
+```
+
+Substitua:
+- `SAMPLE_VAR`: sua variável de compilação personalizada.
+- `SAMPLE_VALUE`: o valor da variável de compilação personalizada.
+
+Para executar o código do seu projeto do Dataform no BigQuery e recriar todas as tabelas do zero, execute o seguinte comando:
+
+```bash
+dataform run --full-refresh
+```
+
+> Sem `--full-refresh`, o Dataform atualiza tabelas incrementais sem reconstruí-las do zero.
+
+---
+
+### Execução em Modo de Simulação
+
+Para conferir o código SQL compilado final adaptado ao estado atual sem executá-lo no BigQuery, execute o seguinte comando:
+
+```bash
+dataform run --dry-run
+```
+
+
+## 6. Finalização
+
+Com esses comandos, você agora tem a flexibilidade de manipular diversos datasets, views e tabelas no BigQuery diretamente via Dataform CLI, automatizando e otimizando o gerenciamento de seus dados de forma eficiente.
+
+Para mais informações consulte a documentação oficial do google cloud:
+[Documentação](https://cloud.google.com/dataform/docs/use-dataform-cli?hl=pt-br)
